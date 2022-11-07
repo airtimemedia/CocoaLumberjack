@@ -15,16 +15,14 @@ let package = Package(
         // Products define the executables and libraries produced by a package, and make them visible to other packages.
         .library(
             name: "CocoaLumberjack",
+            type: .dynamic,
             targets: ["CocoaLumberjack"]),
         .library(
             name: "CocoaLumberjackSwift",
+            type: .dynamic,
             targets: ["CocoaLumberjackSwift"]),
-        .library(
-            name: "CocoaLumberjackSwiftLogBackend",
-            targets: ["CocoaLumberjackSwiftLogBackend"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/apple/swift-log.git", from: "1.4.4"),
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
@@ -42,20 +40,11 @@ let package = Package(
                 "CocoaLumberjackSwiftSupport"
             ],
             exclude: ["Supporting Files"]),
-        .target(
-            name: "CocoaLumberjackSwiftLogBackend",
-            dependencies: [
-                "CocoaLumberjack",
-                .product(name: "Logging", package: "swift-log")
-            ]),
         .testTarget(
             name: "CocoaLumberjackTests",
             dependencies: ["CocoaLumberjack"]),
         .testTarget(
             name: "CocoaLumberjackSwiftTests",
             dependencies: ["CocoaLumberjackSwift"]),
-        .testTarget(
-            name: "CocoaLumberjackSwiftLogBackendTests",
-            dependencies: ["CocoaLumberjackSwiftLogBackend"]),
     ]
 )
